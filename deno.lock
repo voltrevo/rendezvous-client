@@ -1,0 +1,6 @@
+{
+  "version": "3",
+  "remote": {
+    "https://deno.land/std@0.170.0/encoding/base58.ts": "d94f6438737a276e6f910f70ca528f6d0e4eddb89ef9dc249cf682d627c82a63"
+  }
+}
