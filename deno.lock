@@ -1,6 +1,13 @@
 {
   "version": "3",
   "remote": {
-    "https://deno.land/std@0.170.0/encoding/base58.ts": "d94f6438737a276e6f910f70ca528f6d0e4eddb89ef9dc249cf682d627c82a63"
+    "https://deno.land/std@0.170.0/encoding/base58.ts": "d94f6438737a276e6f910f70ca528f6d0e4eddb89ef9dc249cf682d627c82a63",
+    "https://deno.land/std@0.65.0/encoding/hex.ts": "8dc1489e66b22fec26950c7a55391b12be0d9f9a80cbc7b422700cdff85cd2f7",
+    "https://deno.land/std@0.65.0/hash/_sha3/keccak.ts": "b19554f115ed59c2cef8fdb506ca109bf2236178f6103aa566bd947e9ba5cb39",
+    "https://deno.land/std@0.65.0/hash/_sha3/keccakf.ts": "dc61aadfe57d56e21d85cdea36ab14dcba1bc70b3d0c6aa4417e1d26bb0b748d",
+    "https://deno.land/std@0.65.0/hash/_sha3/sha3.ts": "116276c21e6e53c195de5b07df02c68e936dae023d57a1f779f86e1e3a2180ae",
+    "https://deno.land/std@0.65.0/hash/_sha3/shake.ts": "fd4c4f136103f80b19d29bb8d02574369a326d8206428f74c946f7530203ee26",
+    "https://deno.land/std@0.65.0/hash/_sha3/sponge.ts": "a44d126cc0dbfe4be0c5d31e83683fecc64b9b0a5c0da9de01801d6fb7321229",
+    "https://deno.land/std@0.65.0/hash/sha3.ts": "cd6c91560675543ca976a2219e8de9c505884943e75bca9cc19bb1af68d954ca"
   }
 }
