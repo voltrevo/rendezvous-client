@@ -1,9 +1,9 @@
-import { Keccak256 } from "https://deno.land/std@0.65.0/hash/sha3.ts";
-import { encodeBase64Url } from "https://deno.land/std@0.223.0/encoding/base64url.ts";
+import keccak256 from "keccak256";
+import base64url from "base64url";
 
-import Emitter from "./Emitter.ts";
-import Key from "./Key.ts";
-import Cipher from "./Cipher.ts";
+import Emitter from "./Emitter";
+import Key from "./Key";
+import Cipher from "./Cipher";
 
 type Events = {
   open(ev: Event): void;
@@ -28,10 +28,10 @@ export default class PrivateRoom extends Emitter<Events> {
       this.rendezvousBasePath = this.rendezvousBasePath.slice(0, -1);
     }
 
-    this.id = new Uint8Array(new Keccak256().update(key.data).digest());
+    this.id = keccak256(key.data);
 
     this.roomPath = `${this.rendezvousBasePath}/rooms/${
-      encodeBase64Url(this.id)
+      base64url.toBase64(this.id)
     }`;
 
     this.cipher = new Cipher(this.key);

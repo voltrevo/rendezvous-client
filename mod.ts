@@ -1,2 +1,2 @@
-export { default as PrivateRoom } from "./src/PrivateRoom.ts";
-export { default as Key } from "./src/Key.ts";
+export { default as PrivateRoom } from "./src/PrivateRoom";
+export { default as Key } from "./src/Key";

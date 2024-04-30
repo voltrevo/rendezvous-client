@@ -1,7 +1,6 @@
-import { Aes } from "https://deno.land/x/crypto@v0.10.1/aes.ts";
-import { Ctr } from "https://deno.land/x/crypto@v0.10.1/block-modes.ts";
+import aes from "aes-js";
 import { Packr, Unpackr } from "msgpackr";
-import Key from "./Key.ts";
+import Key from "./Key";
 
 const unpackr = new Unpackr();
 const packr = new Packr();
@@ -18,7 +17,7 @@ export default class Cipher {
     plaintextPadded.set(plaintextBytes, 0);
 
     const iv = crypto.getRandomValues(new Uint8Array(16));
-    const cipher = new Ctr(Aes, this.key.data, iv);
+    const cipher = new aes.ModeOfOperation.ctr(this.key.data, iv);
     const ciphertext = cipher.encrypt(plaintextPadded);
 
     const fullCiphertext = new Uint8Array(16 + ciphertext.length);

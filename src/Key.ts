@@ -1,4 +1,4 @@
-import * as base58 from "https://deno.land/std@0.170.0/encoding/base58.ts";
+import * as base58 from "bs58";
 
 export default class Key {
   #nominal: undefined;

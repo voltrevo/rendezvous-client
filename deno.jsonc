@@ -1,7 +1,0 @@
-{
-  "imports": {
-    "events": "node:events",
-    "typed-emitter": "npm:typed-emitter@^2.1.0",
-    "msgpackr": "npm:msgpackr@^1.10.1"
-  }
-}
