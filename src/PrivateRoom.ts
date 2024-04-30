@@ -1,3 +1,5 @@
+import WebSocket from "ws";
+
 import keccak256 from "keccak256";
 import base64url from "base64url";
 
@@ -6,10 +8,10 @@ import Key from "./Key";
 import Cipher from "./Cipher";
 
 type Events = {
-  open(ev: Event): void;
+  open(ev: WebSocket.Event): void;
   message(data: unknown): void;
-  close(ev: CloseEvent): void;
-  error(ev: Event | ErrorEvent): void;
+  close(ev: WebSocket.CloseEvent): void;
+  error(ev: WebSocket.ErrorEvent): void;
 };
 
 export default class PrivateRoom extends Emitter<Events> {
@@ -28,10 +30,10 @@ export default class PrivateRoom extends Emitter<Events> {
       this.rendezvousBasePath = this.rendezvousBasePath.slice(0, -1);
     }
 
-    this.id = keccak256(key.data);
+    this.id = keccak256(Buffer.from(key.data));
 
     this.roomPath = `${this.rendezvousBasePath}/rooms/${
-      base64url.toBase64(this.id)
+      base64url.encode(Buffer.from(this.id))
     }`;
 
     this.cipher = new Cipher(this.key);
@@ -40,11 +42,16 @@ export default class PrivateRoom extends Emitter<Events> {
 
     this.socket.onopen = (ev) => this.emit("open", ev);
 
-    this.socket.onmessage = async (ev) =>
+    this.socket.onmessage = async (ev) => {
+      if (!Buffer.isBuffer(ev.data)) {
+        throw new Error("Expected buffer");
+      }
+
       this.emit(
         "message",
-        this.cipher.decrypt(new Uint8Array(await ev.data.arrayBuffer())),
+        this.cipher.decrypt(new Uint8Array(ev.data)),
       );
+    };
 
     this.socket.onclose = (ev) => this.emit("close", ev);
     this.socket.onerror = (ev) => this.emit("error", ev);

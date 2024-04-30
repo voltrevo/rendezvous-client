@@ -1,4 +1,4 @@
-import aes from "aes-js";
+import aes, { Counter } from "aes-js";
 import { Packr, Unpackr } from "msgpackr";
 import Key from "./Key";
 
@@ -17,7 +17,7 @@ export default class Cipher {
     plaintextPadded.set(plaintextBytes, 0);
 
     const iv = crypto.getRandomValues(new Uint8Array(16));
-    const cipher = new aes.ModeOfOperation.ctr(this.key.data, iv);
+    const cipher = new aes.ModeOfOperation.ctr(this.key.data, new Counter(iv));
     const ciphertext = cipher.encrypt(plaintextPadded);
 
     const fullCiphertext = new Uint8Array(16 + ciphertext.length);
@@ -29,7 +29,7 @@ export default class Cipher {
 
   decrypt(ciphertext: Uint8Array): unknown {
     const iv = ciphertext.slice(0, 16);
-    const cipher = new Ctr(Aes, this.key.data, iv);
+    const cipher = new aes.ModeOfOperation.ctr(this.key.data, new Counter(iv));
     const decryptedBytes = cipher.decrypt(ciphertext.slice(16));
 
     const decryptions = unpackr.unpackMultiple(decryptedBytes) as unknown[];

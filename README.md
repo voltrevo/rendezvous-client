@@ -20,7 +20,7 @@ to the constructor.
 
 ## Chat Example
 
-### Host: `./manualTests/host.ts`
+### Host: `./node_modules/tsx manualTests/host.ts`
 
 ```
 $ ./manualTests/host.ts
@@ -32,7 +32,7 @@ received: hello
 send: (type here and press enter)
 ```
 
-### Join: `./manualTests/join.ts`
+### Join: `./node_modules/tsx manualTests/join.ts`
 
 ```
 $ ./manualTests/join.ts

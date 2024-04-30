@@ -1,6 +1,7 @@
-import * as base58 from "https://deno.land/std@0.170.0/encoding/base58.ts";
-import { PrivateRoom } from "../../mod.ts";
-import Emitter from "../../src/Emitter.ts";
+import * as base58 from "bs58";
+import { PrivateRoom } from "../../mod";
+import Emitter from "../../src/Emitter";
+import readStdin from "./readStdin";
 
 export default async function chat(room: PrivateRoom) {
   const display = new Display();
@@ -10,7 +11,10 @@ export default async function chat(room: PrivateRoom) {
 
   room.on("open", () => display.log("opened"));
   room.on("close", () => display.log("closed"));
-  room.on("error", (_ev) => display.log("errored"));
+  room.on(
+    "error",
+    (_ev) => display.log(`errored: ${JSON.stringify(_ev.message)}`),
+  );
 
   room.on("message", (msg) => display.log(`received: ${msg}`));
 
@@ -39,7 +43,7 @@ class Display extends Emitter<{ message(message: string): void; end(): void }> {
       while (true) {
         const c = new Uint8Array(1);
 
-        if (await Deno.stdin.read(c) === null) {
+        if (await readStdin(c) === null) {
           this.emit("end");
           break;
         }
@@ -79,7 +83,9 @@ class Display extends Emitter<{ message(message: string): void; end(): void }> {
     console.log(this.msgs.join("\n"));
     console.log();
 
-    Deno.stdout.write(new TextEncoder().encode("send: "));
-    Deno.stdout.write(this.partialMessage.slice(0, this.partialMessageIndex));
+    process.stdout.write(new TextEncoder().encode("send: "));
+    process.stdout.write(
+      this.partialMessage.slice(0, this.partialMessageIndex),
+    );
   }
 }
