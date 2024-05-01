@@ -1,6 +1,6 @@
 {
   "name": "rendezvous-client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Client library designed for use with [rendezvous](https://github.com/voltrevo/rendezvous).",
   "main": "dist/mod.js",
   "scripts": {
@@ -23,9 +23,9 @@
     "base64url": "^3.0.1",
     "bs58": "^5.0.0",
     "events": "^3.3.0",
+    "isomorphic-ws": "^5.0.0",
     "keccak256": "^1.0.6",
     "msgpackr": "^1.10.1",
-    "typed-emitter": "^2.1.0",
-    "ws": "^8.17.0"
+    "typed-emitter": "^2.1.0"
   }
 }

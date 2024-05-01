@@ -1,4 +1,4 @@
-import WebSocket from "ws";
+import WebSocket from "isomorphic-ws";
 
 import keccak256 from "keccak256";
 import base64url from "base64url";
